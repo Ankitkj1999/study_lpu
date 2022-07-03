@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sms_autofill/sms_autofill.dart';
+import 'package:study_lpu/home_screen.dart';
 
 class MyLoginPage extends StatefulWidget {
   const MyLoginPage({Key? key}) : super(key: key);
@@ -34,7 +35,7 @@ class _MyLoginPageState extends State<MyLoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Firebase Phone Authentication Smaple'),
+        title: const Text('Firebase Phone Authentication '),
       ),
       key: globalKey,
       resizeToAvoidBottomInset: false,
@@ -111,10 +112,27 @@ class _MyLoginPageState extends State<MyLoginPage> {
                               color: Colors.white))),
                 ),
               if (showSuccessWidget)
-                const Text(
-                  'You are successful logged in!',
-                  style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
-                )
+                //         {
+                //   // Your navigation code
+                //   Navigator.of(context).pushReplacement(
+                //     MaterialPageRoute(
+                //       builder: (context) => const TextScreen()));
+                // }
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const HomePage()));
+                  },
+                  child: const Text('GO TO HOME'),
+                ),
+
+              // const Text(
+              //   'You are successful logged in!',
+              //   style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              // ),
             ],
           ),
         ),

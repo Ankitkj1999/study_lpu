@@ -32,6 +32,8 @@ dependencies:
   firebase_core: ^1.19.1
   firebase_auth: ^3.4.1
   sms_autofill: ^2.2.0
+  persistent_bottom_nav_bar: ^4.0.2
+  intl:
 
 
   # The following adds the Cupertino Icons font to your application.
