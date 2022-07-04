@@ -9,6 +9,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late String uid;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

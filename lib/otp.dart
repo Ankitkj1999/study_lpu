@@ -2,10 +2,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'package:pinput/pinput.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OTPScreen extends StatefulWidget {
   final String phone;
-  const OTPScreen(this.phone, {Key? key}) : super(key: key);
+  final String countryCode;
+  const OTPScreen(this.phone, this.countryCode, {Key? key}) : super(key: key);
   @override
   _OTPScreenState createState() => _OTPScreenState();
 }
@@ -22,6 +24,8 @@ class _OTPScreenState extends State<OTPScreen> {
       color: const Color.fromRGBO(126, 203, 224, 1),
     ),
   );
+
+  get prefs => null;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +39,7 @@ class _OTPScreenState extends State<OTPScreen> {
             margin: const EdgeInsets.only(top: 40),
             child: Center(
               child: Text(
-                'Verify +91 ${widget.phone}',
+                'Verify ${widget.countryCode} ${widget.phone}',
                 style:
                     const TextStyle(fontWeight: FontWeight.bold, fontSize: 26),
               ),
@@ -56,16 +60,21 @@ class _OTPScreenState extends State<OTPScreen> {
               // followingFieldDecoration: pinPutDecoration,
               // pinAnimationType: PinAnimationType.fade,
               onSubmitted: (pin) async {
+                debugPrint('submit pressed');
+
                 try {
                   await FirebaseAuth.instance
                       .signInWithCredential(PhoneAuthProvider.credential(
                           verificationId: _verificationCode, smsCode: pin))
                       .then((value) async {
                     if (value.user != null) {
+                      _loginState();
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (context) => Home()),
                           (route) => false);
+                      // prefs.setBool("isLoggedIn", true);
+
                     }
                   });
                 } catch (e) {
@@ -81,9 +90,15 @@ class _OTPScreenState extends State<OTPScreen> {
     );
   }
 
+  _loginState() async {
+    bool isAuthenticated = true;
+    await prefs.setBool("auth", isAuthenticated);
+    debugPrint('User Logged IN');
+  }
+
   _verifyPhone() async {
     await FirebaseAuth.instance.verifyPhoneNumber(
-        phoneNumber: '+91${widget.phone}',
+        phoneNumber: '${widget.countryCode}${widget.phone}',
         verificationCompleted: (PhoneAuthCredential credential) async {
           await FirebaseAuth.instance
               .signInWithCredential(credential)
@@ -116,6 +131,7 @@ class _OTPScreenState extends State<OTPScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     _verifyPhone();
   }
 }
