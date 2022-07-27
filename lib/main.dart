@@ -27,11 +27,13 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return SplashScreen();
+    return const SplashScreen();
   }
 }
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -69,8 +71,10 @@ class _SplashScreenState extends State<SplashScreen> {
     debugPrint('Hello');
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    var isAlreadyAuthenticated = prefs.getBool("auth");
 
+    bool? isAlreadyAuthenticated = prefs.getBool('auth');
+    debugPrint(
+        'The initial value of isAlreadyAuthenticated $isAlreadyAuthenticated');
     isAlreadyAuthenticated ??= false;
     // var status = prefs.getBool('isLoggedIn') ?? false;
     debugPrint('Hello');

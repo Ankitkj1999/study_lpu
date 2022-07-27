@@ -91,8 +91,9 @@ class _OTPScreenState extends State<OTPScreen> {
   }
 
   _loginState() async {
-    bool isAuthenticated = true;
-    await prefs.setBool("auth", isAuthenticated);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    prefs.setBool("auth", true);
     debugPrint('User Logged IN');
   }
 
