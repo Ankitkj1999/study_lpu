@@ -68,7 +68,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigateUser() async {
-    debugPrint('Hello');
+    // debugPrint('Hello');
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -77,14 +77,16 @@ class _SplashScreenState extends State<SplashScreen> {
         'The initial value of isAlreadyAuthenticated $isAlreadyAuthenticated');
     isAlreadyAuthenticated ??= false;
     // var status = prefs.getBool('isLoggedIn') ?? false;
-    debugPrint('Hello');
-    debugPrint('Hello');
+    // debugPrint('Hello');
+    // debugPrint('Hello');
     debugPrint(
         'The initial value of isAlreadyAuthenticated $isAlreadyAuthenticated');
 
     if (isAlreadyAuthenticated) {
-      Navigator.pushAndRemoveUntil(context,
-          MaterialPageRoute(builder: (context) => Home()), (route) => false);
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => const Home()),
+          (route) => false);
     } else {
       Navigator.pushAndRemoveUntil(
           context,
