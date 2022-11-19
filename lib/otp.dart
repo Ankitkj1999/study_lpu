@@ -79,8 +79,11 @@ class _OTPScreenState extends State<OTPScreen> {
                   });
                 } catch (e) {
                   FocusScope.of(context).unfocus();
-                  _scaffoldkey.currentState!.showSnackBar(
-                      const SnackBar(content: Text('invalid OTP')));
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text("Invalod OTP!")));
+
+                  // _scaffoldkey.currentState!.showSnackBar(
+                  //     const SnackBar(content: Text('invalid OTP')));
                 }
               },
             ),

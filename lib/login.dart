@@ -73,8 +73,9 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             margin: const EdgeInsets.all(10),
             width: double.infinity,
-            child: FlatButton(
-              color: Colors.blue,
+            child: TextButton(
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
+              // color: Colors.blue,
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) =>
